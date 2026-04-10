@@ -32,10 +32,6 @@ def main():
     asteroidfield = AsteroidField()
     # shot = Shot()
 
-    
-    
-    
-
     while True:
         log_state()
         for event in pygame.event.get():
@@ -47,7 +43,12 @@ def main():
                 log_event("player_hit")
                 print("Game Over!")
                 sys.exit()
-                
+            for shot in shots:
+                if shot.collides_with(asteroid):
+                    log_event("asteroid_shot")
+                    shot.kill()
+                    asteroid.kill()
+        
         screen.fill("black")
         for drawy in drawable:
            drawy.draw(screen)
